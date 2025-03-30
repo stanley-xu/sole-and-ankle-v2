@@ -22,14 +22,9 @@ const SuperHeader = () => {
   );
 };
 
-const Wrapper = styled.div`
-  font-size: 0.875rem;
-  color: ${COLORS.gray[300]};
-  background-color: ${COLORS.gray[900]};
-`;
-
 const MarketingMessage = styled.span`
   color: ${COLORS.white};
+  flex: 1;
 `;
 
 const HelpLink = styled.a`
@@ -39,6 +34,22 @@ const HelpLink = styled.a`
 
   &:not(:focus-visible) {
     outline: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  font-size: 0.875rem;
+  color: ${COLORS.gray[300]};
+  background-color: ${COLORS.gray[900]};
+
+  padding: 8px 0;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  align-items: center;
+
+  > *:not(${MarketingMessage}) {
+    margin-left: 24px;
   }
 `;
 
