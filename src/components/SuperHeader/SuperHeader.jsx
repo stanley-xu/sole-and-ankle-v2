@@ -42,15 +42,12 @@ const Wrapper = styled.div`
   color: ${COLORS.gray[300]};
   background-color: ${COLORS.gray[900]};
 
-  padding: 8px 0;
-  padding-left: 32px;
-  padding-right: 32px;
+  height: 40px;
+  padding: 12px 32px;
+
   display: flex;
   align-items: center;
-
-  > *:not(${MarketingMessage}) {
-    margin-left: 24px;
-  }
+  gap: 24px;
 `;
 
 export default SuperHeader;
