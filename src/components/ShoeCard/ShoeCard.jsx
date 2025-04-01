@@ -31,8 +31,6 @@ const ShoeCard = ({
       ? 'new-release'
       : 'default'
 
-  const formattedPrice = formatPrice(price)
-
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
@@ -44,7 +42,14 @@ const ShoeCard = ({
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{variant === 'on-sale' ? <s>{formattedPrice}</s> : formattedPrice}</Price>
+          <Price
+            style={{
+              '--color': variant === 'on-sale' ? COLORS.gray[500] : undefined,
+              '--text-decoration': variant === 'on-sale' ? 'line-through' : undefined,
+            }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
@@ -103,7 +108,10 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--text-decoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
