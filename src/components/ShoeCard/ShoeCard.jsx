@@ -31,19 +31,23 @@ const ShoeCard = ({
       ? 'new-release'
       : 'default'
 
+  const formattedPrice = formatPrice(price)
+
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          {(variant !== 'default') ? <Flag variant={variant} /> : null}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price>{variant === 'on-sale' ? <s>{formattedPrice}</s> : formattedPrice}</Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          {variant === 'on-sale' ? <SalePrice>{formatPrice(salePrice)}</SalePrice> : null}
         </Row>
       </Wrapper>
     </Link>
@@ -55,7 +59,8 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -67,7 +72,44 @@ const Image = styled.img`
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
+
+const Flag = ({ variant }) => {
+  let colour = null
+  let text = null
+  switch (variant) {
+    case 'on-sale': {
+      colour = 'hsla(340, 65%, 47%, 1)'
+      text = 'Sale'
+      break;
+    }
+    case 'new-release': {
+      colour = 'hsla(240, 60%, 63%, 1)'
+      text = 'Just released!'
+      break;
+    }
+    default: {
+      colour = null
+    }
+  }
+
+  const Component = styled.div`
+    position: absolute;
+    top: 12px;
+    right: -4px;
+    height: 2rem;
+
+    padding: 7px 9px 9px 10px;
+
+    color: white;
+    font-size: 14px;
+    background-color: ${colour};
+  }`
+
+  return <Component>{text}</Component>
+}
 
 const Name = styled.h3`
   font-weight: ${WEIGHTS.medium};
