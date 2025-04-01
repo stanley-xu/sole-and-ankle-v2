@@ -37,7 +37,8 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          {(variant !== 'default') ? <Flag variant={variant} /> : null}
+          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+          {variant === 'new-release' && <NewReleaseFlag>Just released!</NewReleaseFlag>}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
@@ -76,40 +77,26 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-const Flag = ({ variant }) => {
-  let colour = null
-  let text = null
-  switch (variant) {
-    case 'on-sale': {
-      colour = 'hsla(340, 65%, 47%, 1)'
-      text = 'Sale'
-      break;
-    }
-    case 'new-release': {
-      colour = 'hsla(240, 60%, 63%, 1)'
-      text = 'Just released!'
-      break;
-    }
-    default: {
-      colour = null
-    }
-  }
+const Flag = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  height: 2rem;
 
-  const Component = styled.div`
-    position: absolute;
-    top: 12px;
-    right: -4px;
-    height: 2rem;
+  padding: 7px 9px 9px 10px;
 
-    padding: 7px 9px 9px 10px;
+  color: ${COLORS.white};
+  font-size: ${14.0 / 16}rem;
+  font-weight: ${WEIGHTS.bold}
+`
 
-    color: white;
-    font-size: 14px;
-    background-color: ${colour};
-  }`
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.secondary}
+`
 
-  return <Component>{text}</Component>
-}
+const NewReleaseFlag = styled(Flag)`
+  background-color: ${COLORS.primary}
+`
 
 const Name = styled.h3`
   font-weight: ${WEIGHTS.medium};
