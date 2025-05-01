@@ -22,14 +22,9 @@ const SuperHeader = () => {
   );
 };
 
-const Wrapper = styled.div`
-  font-size: 0.875rem;
-  color: ${COLORS.gray[300]};
-  background-color: ${COLORS.gray[900]};
-`;
-
 const MarketingMessage = styled.span`
   color: ${COLORS.white};
+  flex: 1;
 `;
 
 const HelpLink = styled.a`
@@ -40,6 +35,19 @@ const HelpLink = styled.a`
   &:not(:focus-visible) {
     outline: none;
   }
+`;
+
+const Wrapper = styled.div`
+  font-size: 0.875rem;
+  color: ${COLORS.gray[300]};
+  background-color: ${COLORS.gray[900]};
+
+  height: 40px;
+  padding: 12px 32px;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
 `;
 
 export default SuperHeader;
